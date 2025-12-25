@@ -1,0 +1,173 @@
+# API Contract: Voice Processing for VLA System
+
+# This contract defines the interfaces for voice processing components in the VLA system
+
+openapi: 3.0.0
+info:
+  title: Voice Processing API for VLA System
+  version: 1.0.0
+  description: API for processing voice commands and converting them to actionable intents
+
+paths:
+  /voice/recognize:
+    post:
+      summary: Process voice input and extract intent
+      description: Accepts audio data and returns transcribed text with extracted intent
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                audio:
+                  type: string
+                  format: binary
+                  description: Audio file containing the voice command
+                user_context:
+                  type: object
+                  description: Context about the user issuing the command
+      responses:
+        '200':
+          description: Successfully processed voice command
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transcript:
+                    type: string
+                    description: Transcribed text from the voice command
+                  intent:
+                    type: string
+                    description: Extracted intent from the command
+                  confidence_score:
+                    type: number
+                    format: float
+                    minimum: 0.0
+                    maximum: 1.0
+                    description: Confidence level of intent recognition
+                  extracted_parameters:
+                    type: object
+                    description: Additional parameters extracted from the command
+        '400':
+          description: Invalid audio format or processing error
+        '500':
+          description: Internal server error during processing
+
+  /cognitive/plan:
+    post:
+      summary: Generate cognitive plan from natural language command
+      description: Takes a natural language command and generates a sequence of executable actions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                  description: Natural language command to process
+                user_context:
+                  type: object
+                  description: Context about the user and environment
+                robot_capabilities:
+                  type: array
+                  items:
+                    type: string
+                  description: List of capabilities the robot has
+      responses:
+        '200':
+          description: Successfully generated cognitive plan
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plan_id:
+                    type: string
+                    description: Unique identifier for the generated plan
+                  action_sequence:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ActionStep'
+                  estimated_duration:
+                    type: number
+                    format: float
+                    description: Estimated time to execute the plan in seconds
+                  confidence_level:
+                    type: number
+                    format: float
+                    minimum: 0.0
+                    maximum: 1.0
+                    description: Confidence in the plan's success
+        '400':
+          description: Invalid command format or unprocessable request
+        '500':
+          description: Internal server error during planning
+
+  /actions/execute:
+    post:
+      summary: Execute action sequence on robot
+      description: Sends action sequence to robot for execution
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action_sequence:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ActionStep'
+                robot_id:
+                  type: string
+                  description: Identifier of the target robot
+      responses:
+        '200':
+          description: Successfully initiated action execution
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  execution_id:
+                    type: string
+                    description: Unique identifier for the execution instance
+                  status:
+                    type: string
+                    enum: [pending, executing, completed, failed]
+                  estimated_completion:
+                    type: string
+                    format: date-time
+                    description: Estimated time of completion
+        '400':
+          description: Invalid action sequence or robot ID
+        '500':
+          description: Internal server error during execution
+
+components:
+  schemas:
+    ActionStep:
+      type: object
+      properties:
+        action_type:
+          type: string
+          enum: [movement, manipulation, communication, sensing]
+          description: Type of action to perform
+        target:
+          type: string
+          description: What the action targets (e.g., "left_arm", "navigation")
+        parameters:
+          type: object
+          description: Specific parameters for the action
+        dependencies:
+          type: array
+          items:
+            type: string
+          description: IDs of actions that must complete before this one
+      required:
+        - action_type
+        - target
