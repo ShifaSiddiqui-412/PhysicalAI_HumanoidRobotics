@@ -1,0 +1,157 @@
+/**
+ * Custom DocSidebar Styles
+ * Enhanced styling for the documentation sidebar with collapsible categories
+ */
+
+.sidebar {
+  width: var(--doc-sidebar-width);
+  position: sticky;
+  top: 0;
+  padding-top: var(--ifm-navbar-height);
+  height: 100vh;
+  background-color: var(--ifm-menu-background-color);
+  box-shadow: inset -1px 0 0 0 var(--ifm-toc-border-color);
+  transition: all 0.3s ease;
+  overflow-y: auto;
+}
+
+.sidebarInner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebarNav {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.sidebarItemsWrapper {
+  padding: 0 0.5rem;
+}
+
+.docSidebarMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Sidebar item styles */
+.menu {
+  padding: 0.5rem;
+}
+
+.menu__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu__list-item {
+  margin-bottom: 0.25rem;
+}
+
+.menu__list-item-collapsible {
+  border-radius: var(--ifm-global-radius);
+  padding: 0.5rem;
+  margin: 0.125rem 0;
+  transition: all 0.2s ease;
+}
+
+.menu__list-item-collapsible:hover {
+  background-color: var(--ifm-menu-color-background-hover);
+}
+
+.menu__list-item-collapsible .menu__button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--ifm-global-radius);
+}
+
+.menu__list-item-collapsible .menu__link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--ifm-global-radius);
+  transition: all 0.2s ease;
+}
+
+.menu__list-item-collapsible .menu__link:hover {
+  background-color: var(--ifm-menu-color-background-hover);
+}
+
+.menu__list-item-collapsible .menu__link--active {
+  background-color: var(--ifm-menu-color-background-active);
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* Collapsible category styles */
+.menu__caret {
+  transition: transform 0.2s ease;
+}
+
+.menu__caret--closed {
+  transform: rotate(-90deg);
+}
+
+/* Active page highlighting */
+.menu__link--active {
+  background-color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-darkest);
+  font-weight: 600;
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+/* Responsive sidebar for mobile */
+@media (max-width: 996px) {
+  .sidebar {
+    position: fixed;
+    z-index: 1000;
+    width: 80%;
+    max-width: var(--doc-sidebar-width);
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: var(--ifm-background-surface-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.navbar-sidebar--show {
+    transform: translateX(0);
+  }
+}
+
+/* Accessibility improvements */
+.menu__list-item-collapsible:focus-within,
+.menu__link:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  border-radius: var(--ifm-global-radius);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .menu__list-item-collapsible:hover {
+    border: 1px solid currentColor;
+  }
+
+  .menu__link--active {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .menu__list-item-collapsible,
+  .menu__link {
+    transition: none;
+  }
+}

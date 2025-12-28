@@ -6,7 +6,15 @@
       "Bash(.specify/scripts/powershell/create-new-feature.ps1 -Json \"Module 3: The AI-Robot Brain \\(NVIDIA Isaac™\\)\n\nTarget audience:\nAI and robotics students working on perception, navigation, and training for humanoid robots\n\nFocus:\n- NVIDIA Isaac Sim for photorealistic simulation and synthetic data generation\n- Isaac ROS for hardware-accelerated perception and VSLAM\n- Nav2 for humanoid navigation and path planning\n\nChapters \\(Docusaurus\\):\n- Chapter 1: NVIDIA Isaac Sim and Synthetic Data\n- Chapter 2: Isaac ROS and Accelerated Perception\n- Chapter 3: Nav2 for Humanoid Navigation\n\nTech:\nDocusaurus \\(all files in .md\\)\" --number 3 --short-name \"isaac-ai-brain\")",
       "Bash(.specify/scripts/powershell/check-prerequisites.ps1 -Json)",
       "Bash(.specify/scripts/powershell/create-new-feature.ps1 -Json \"Module 4: Vision-Language-Action \\(VLA\\)\n\nTarget audience:\nAI and robotics students integrating LLMs with humanoid robot control\n\nFocus:\n- Voice-to-action using OpenAI Whisper\n- Language-driven cognitive planning with LLMs\n- Translating natural language tasks into ROS 2 action sequences\n\nChapters \\(Docusaurus\\):\n- Chapter 1: Voice-to-Action Pipelines\n- Chapter 2: Language-Based Cognitive Planning\n- Chapter 3: Capstone – The Autonomous Humanoid\n\nTech:\nDocusaurus \\(all files in .md\\)\" --number 4 --short-name \"vla-integration\")",
-      "Bash(.specify/scripts/powershell/setup-plan.ps1 -Json)"
+      "Bash(.specify/scripts/powershell/setup-plan.ps1 -Json)",
+      "Bash(npm run build)",
+      "Bash(npx docusaurus build)",
+      "Bash(timeout 120 npx docusaurus build)",
+      "Bash(npx docusaurus swizzle @docusaurus/theme-common/useWindowSize -- --typescript)",
+      "Bash(dir \"C:\\\\Users\\\\useruu\\\\Desktop\\\\HackathonBook\\\\my-website\" /s)",
+      "Bash(dir \"C:\\\\Users\\\\useruu\\\\Desktop\\\\HackathonBook\\\\my-website\\\\src\\\\theme\" /s)",
+      "Bash(timeout 120 npx pa11y http://localhost:3000 --include-notices --include-warnings)",
+      "Bash(timeout 10 bash -c 'while ! nc -z localhost 3000; do sleep 1; done; echo \"\"Server is ready\"\"')"
     ]
   }
 }
