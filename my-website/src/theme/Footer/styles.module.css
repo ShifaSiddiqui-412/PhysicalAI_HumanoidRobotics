@@ -1,0 +1,119 @@
+/**
+ * Custom Footer Styles
+ * Enhanced styling for the footer with multiple columns and improved layout
+ */
+
+.footer {
+  background: linear-gradient(135deg, var(--ifm-color-primary-darker) 0%, var(--ifm-color-primary-darkest) 100%);
+  color: white;
+  padding: 3rem 1rem 1.5rem;
+  margin-top: 4rem;
+  border-radius: 40px 40px 0 0;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.footerInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.footerLinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerLinkItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerLinkItem h3 {
+  color: var(--ifm-color-primary-lightest);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.footerLinkItem a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0;
+  border-radius: var(--ifm-global-radius);
+  transition: all 0.2s ease;
+}
+
+.footerLinkItem a:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding-left: 0.5rem;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footerCopyright {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footerLogo img {
+  height: 2rem;
+  filter: brightness(0) invert(1);
+}
+
+/* Dark mode specific styles */
+.footerDark {
+  background: linear-gradient(135deg, var(--ifm-color-primary-darkest) 0%, var(--ifm-color-secondary-darkest) 100%);
+}
+
+/* Light mode specific styles */
+.footerLight {
+  background: linear-gradient(135deg, var(--ifm-color-primary-lighter) 0%, var(--ifm-color-primary) 100%);
+  color: var(--ifm-font-color-base);
+}
+
+.footerLight .footerLinkItem h3 {
+  color: var(--ifm-color-primary-darkest);
+}
+
+.footerLight .footerLinkItem a {
+  color: var(--ifm-font-color-base);
+}
+
+.footerLight .footerCopyright {
+  color: var(--ifm-font-color-base);
+}
+
+@media (max-width: 768px) {
+  .footerLinks {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer {
+    border-radius: 20px 20px 0 0;
+  }
+}

@@ -1,0 +1,142 @@
+/**
+ * Custom Card Component Styles
+ * Consistent card styling for features and documentation sections
+ */
+
+.card {
+  background: var(--ifm-background-surface-color);
+  border-radius: var(--ifm-global-radius);
+  padding: 1.5rem;
+  box-shadow: var(--ifm-global-shadow);
+  transition: all 0.3s ease;
+  border: 1px solid var(--ifm-toc-border-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--ifm-color-primary-lighter);
+}
+
+.card:focus-within {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.cardIcon {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--ifm-color-primary);
+}
+
+.cardTitle {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ifm-heading-color);
+  line-height: 1.4;
+}
+
+.cardDescription {
+  margin: 0 0 1.5rem 0;
+  color: var(--ifm-font-color-base);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+/* Elevated card variant */
+.card--elevated {
+  background: white;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card--elevated:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* Outlined card variant */
+.card--outlined {
+  background: transparent;
+  border: 2px solid var(--ifm-color-primary-lighter);
+  box-shadow: none;
+}
+
+.card--outlined:hover {
+  background: rgba(var(--ifm-color-primary-rgb), 0.03);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation for card press effect */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.2) 0%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:active::after {
+  opacity: 1;
+  transition: opacity 0s;
+}
+
+/* Accessibility: High contrast mode support */
+@media (prefers-contrast: high) {
+  .card {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Accessibility: Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+    box-shadow: var(--ifm-global-shadow);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    padding: 1.25rem;
+  }
+
+  .cardTitle {
+    font-size: 1.125rem;
+  }
+
+  .cardIcon {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Focus management for keyboard navigation */
+.card:focus,
+.card a:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  border-radius: var(--ifm-global-radius);
+}

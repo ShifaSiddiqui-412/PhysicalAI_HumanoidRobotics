@@ -1,0 +1,67 @@
+/**
+ * Custom Color Mode Toggle Styles
+ * Enhanced styling for the dark/light mode toggle in navbar
+ */
+
+.colorModeToggle {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.colorModeButton {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.colorModeButton:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.colorModeButton:focus {
+  outline: 2px solid var(--ifm-color-primary-lightest);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.lightMode {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.darkMode {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Accessibility: High contrast mode support */
+@media (prefers-contrast: high) {
+  .colorModeButton {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Accessibility: Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .colorModeButton {
+    transition: none;
+  }
+}
